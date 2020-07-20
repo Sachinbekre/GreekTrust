@@ -1,21 +1,111 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<app-header-bar></app-header-bar>
+<div class="container mt-5" *ngIf="!falconeShow">
+  <div class="falcone text-center">
+    <h1>Finding Falcone!</h1>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="select-planets">{{header_text}}:</h5>
+      <div class="row">
+        <div class="col-md-3 col-lg-3 col-xl-3">
+            <label for=""> Destination 1</label>
+            <select  class="form-control" id="planets_details" name="planets_details" (change)="s1($event.target.value)">
+                <option [ngValue]="abc" disabled>Select</option>
+                <option  *ngFor="let item of planets_details" [value]="item.name"
+                [disabled]="item.name === sel_val2 || item.name ===sel_val3 || item.name ===sel_val4"
+                >{{item.name}}</option>
+            </select>
+            <div class="mt-2" *ngFor="let vehicle1 of vehicles_details">
+                <input 
+                type="radio" 
+                name="radio1" 
+                [value]="vehicle1.name" 
+                (click)="i1($event.target.value)"
+                 >
+                <label class="label ml-2">{{vehicle1.name}} ({{vehicle1.total_no}})</label>
+            </div>
+        </div>
+        <div class="col-md-3 col-lg-3 col-xl-3">
+            <label for=""> Destination 2</label>
+            <select  class="form-control" (change)="s2($event.target.value)">
+                <option [ngValue]="abc" disabled>Select</option>
+                <option  [disabled]="i.name === sel_val1 || i.name ===sel_val3 || i.name ===sel_val4"  *ngFor="let i of planets_details" [value]="i.name" >{{i.name}}</option>
+            </select>
+            <div class="mt-2" *ngFor="let vehicle1 of vehicles_details">
+                <input 
+                type="radio" 
+                name="radio2" 
+                [value]="vehicle1.name" 
+                (click)="i2($event.target.value)"
+                [disabled]="vehicle1.name === input_value1 || vehicle1.name === input_value3 || vehicle1.name ===input_value4" >
+                <label class="label ml-2">{{vehicle1.name}} ({{vehicle1.total_no}})</label>
+            </div>
+        </div>
+        <div class="col-md-3 col-lg-3 col-xl-3">
+            <label for=""> Destination 3</label>
+            <select  class="form-control" (change)="s3($event.target.value)">
+                <option [ngValue]="abc">Select</option>
+                <option  *ngFor="let i of planets_details" [value]="i.name" 
+                [disabled]="i.name === sel_val1 || i.name === sel_val2 || i.name === sel_val4">{{i.name}}</option>
+            </select>
+            <div class="mt-2" *ngFor="let vehicle1 of vehicles_details">
+                <input 
+                type="radio" 
+                name="radio3" 
+                [value]="vehicle1.name" 
+                (click)="i3($event.target.value)"
+                [disabled]="vehicle1.name === input_value1 ||  vehicle1.name ==input_value2 || vehicle1.name ==input_value4" >
+                <label class="label ml-2">{{vehicle1.name}} ({{vehicle1.total_no}})</label>
+            </div>
+        </div>
+        <div class="col-md-3 col-lg-3 col-xl-3">
+            <label for=""> Destination 4</label>
+            <select  class="form-control" (change)="s4($event.target.value)">
+                <option [ngValue]="abc">Select</option>
+                <option  *ngFor="let i of planets_details" [value]="i.name" 
+                [disabled]="i.name === sel_val1 || i.name === sel_val2 || i.name === sel_val3">{{i.name}}</option>
+            </select>
+            <div class="mt-2" *ngFor="let vehicle1 of vehicles_details">
+                <input 
+                type="radio" 
+                name="radio4" 
+                [value]="vehicle1.name" 
+                (click)="i4($event.target.value)"
+                [disabled]="vehicle1.name === input_value1 || vehicle1.name === input_value2 || vehicle1.name === input_value3">
+                <label class="label ml-2">{{vehicle1.name}} ({{vehicle1.total_no}})</label>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-md-4 mx-auto">
+        <div class="card">
+            <div class="card-body">
+                <div class="text-center">
+                  <h5>Time taken : {{time_took}} </h5>
+                    <button class="btn btn-success" (click)="findFalcone()">Find Falcone</button>
+                  </div>
+            </div>
+        </div>
+    </div>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+</div>
 
-<router-outlet></router-outlet>
+
+<div class="container mt-5 mb-5" *ngIf="falconeShow">
+  <div class="row">
+      <div class="col-md-10 mx-auto">
+          <div class="card">
+              <div class="card-body">
+                <div class="success-falcone" > 
+                  <h3 [ngStyle]="{color: text_color}">{{message}}</h3>
+                  <p>Time taken :  {{time_took}}</p>
+                  <h6>Planet Found :  {{planet_name}}</h6>
+                  <button class="btn btn-success" (click)="start_again()">Start Again</button>
+                </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
